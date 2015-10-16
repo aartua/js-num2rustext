@@ -48,8 +48,7 @@ numberToRusText = {
 	tests_spell_two: ['два', 'две'],
 	tests_spell_thousand: ['тысяча', 'тысячи', 'тысяч'],
 
-	spell: function(number, options)
-	{
+	spell: function (number, options) {
 		message = '';
 		number = Math.abs(number);
 		if (number % 100 > 10 && number % 100 < 20) {
@@ -57,23 +56,42 @@ numberToRusText = {
 
 		} else {
 			switch (number % 10) {
-				case 0: message = options[2]; break;
-				case 1: message = options[0]; break;
-				case 2: message = options[1]; break;
-				case 3: message = options[1]; break;
-				case 4: message = options[1]; break;
-				case 5: message = options[2]; break;
-				case 6: message = options[2]; break;
-				case 7: message = options[2]; break;
-				case 8: message = options[2]; break;
-				case 9: message = options[2]; break;
+				case 0:
+					message = options[2];
+					break;
+				case 1:
+					message = options[0];
+					break;
+				case 2:
+					message = options[1];
+					break;
+				case 3:
+					message = options[1];
+					break;
+				case 4:
+					message = options[1];
+					break;
+				case 5:
+					message = options[2];
+					break;
+				case 6:
+					message = options[2];
+					break;
+				case 7:
+					message = options[2];
+					break;
+				case 8:
+					message = options[2];
+					break;
+				case 9:
+					message = options[2];
+					break;
 			}
 		}
 		return message
 	},
 
-	run: function(number)
-	{
+	run: function (number) {
 		if (isNaN(number)) {
 			return false;
 		}
@@ -112,45 +130,43 @@ numberToRusText = {
 					number -= decade;
 				}
 				break;
-			case 4: case 5: case 6:
-			thousand = Math.floor(number / 1000);
-			if (thousand == 1 ) {
-				this.setPartText(this.spell(thousand, this.tests_spell_one));
-			} else if (thousand == 2) {
-				this.setPartText(this.spell(thousand, this.tests_spell_two));
-			} else {
-				this.run(thousand);
-			}
-			number -= thousand * 1000;
-			this.setPartText(this.spell(thousand, this.tests_spell_thousand));
-			break;
+			case 4:
+			case 5:
+			case 6:
+				thousand = Math.floor(number / 1000);
+				if (thousand == 1) {
+					this.setPartText(this.spell(thousand, this.tests_spell_one));
+				} else if (thousand == 2) {
+					this.setPartText(this.spell(thousand, this.tests_spell_two));
+				} else {
+					this.run(thousand);
+				}
+				number -= thousand * 1000;
+				this.setPartText(this.spell(thousand, this.tests_spell_thousand));
+				break;
 		}
 		if (number > 0) {
 			this.run(number);
 		}
 	},
 
-	setPartText: function(text)
-	{
+	setPartText: function (text) {
 		this.text += text + ' ';
 	},
 
-	get: function (number)
-	{
+	get: function (number) {
 		this.text = '';
 		this.run(number);
 		return this.text;
 	},
 
-	write: function (number)
-	{
+	write: function (number) {
 		this.text = '';
 		this.run(number);
 		document.write(this.text);
 	},
 
-	log: function(number)
-	{
+	log: function (number) {
 		this.text = '';
 		this.run(number);
 		console.log(this.text);
